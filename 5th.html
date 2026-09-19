@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>⭐ Think and Win 💖 - Set 5</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: #F4F7FB;
+            color: #263238;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 15px;
+        }
+
+        /* MAIN CONTAINER */
+
+        .game-container {
+            width: 100%;
+            max-width: 500px;
+            min-height: 600px;
+
+            text-align: center;
+        }
+
+        /* HEADER */
+
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #FF8C00;
+            margin: 10px 0 5px;
+        }
+
+        .stage {
+            font-size: 17px;
+            font-weight: bold;
+            color: #7E57C2;
+            margin-bottom: 10px;
+        }
+
+        /* INFO */
+
+        .info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 8px;
+            margin: 10px 0;
+        }
+
+        .timer {
+            background: #E3F2FD;
+            color: #2196F3;
+
+            padding: 8px 12px;
+            border-radius: 8px;
+
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .chances {
+            color: #E53935;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .score {
+            color: #00A878;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* CARD */
+
+        .card {
+            background: #FFFFFF;
+
+            border: 2px solid #DDE3EA;
+            border-radius: 15px;
+
+            padding: 25px 20px;
+            margin-top: 15px;
+
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+
+            animation: cardAppear 0.4s ease;
+        }
+
+        @keyframes cardAppear {
+
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* QUESTION */
+
+        .question {
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 1.6;
+
+            margin-bottom: 20px;
+        }
+
+        /* ANSWER */
+
+        .answer-box {
+            width: 100%;
+
+            padding: 14px;
+
+            font-size: 17px;
+
+            border: 2px solid #DDE3EA;
+            border-radius: 8px;
+
+            text-align: center;
+
+            outline: none;
+        }
+
+        .answer-box:focus {
+            border-color: #2196F3;
+        }
+
+        /* BUTTON */
+
+        button {
+            width: 100%;
+
+            border: none;
+            border-radius: 8px;
+
+            padding: 14px;
+
+            margin-top: 15px;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            color: white;
+            background: #2196F3;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #1976D2;
+            transform: scale(1.02);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        /* OPTIONS */
+
+        .option {
+            display: flex;
+            align-items: center;
+
+            background: #F4F7FB;
+
+            border: 2px solid #DDE3EA;
+            border-radius: 8px;
+
+            padding: 13px;
+
+            margin: 8px 0;
+
+            cursor: pointer;
+
+            text-align: left;
+
+            transition: 0.2s;
+        }
+
+        .option:hover {
+            background: #E3F2FD;
+            border-color: #2196F3;
+        }
+
+        .option input {
+            margin-right: 12px;
+            transform: scale(1.2);
+        }
+
+        /* POPUP */
+
+        .popup-background {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            background: rgba(0, 0, 0, 0.35);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            z-index: 100;
+        }
+
+        .points-popup {
+            width: 300px;
+
+            background: #E3F2FD;
+
+            border-radius: 18px;
+
+            padding: 40px 20px;
+
+            text-align: center;
+
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+
+            animation: pointsAnimation 0.7s ease;
+        }
+
+        .points-popup h1 {
+            margin: 0;
+
+            color: #00A878;
+
+            font-size: 32px;
+        }
+
+        @keyframes pointsAnimation {
+
+            0% {
+                transform: scale(0.2);
+                opacity: 0;
+            }
+
+            60% {
+                transform: scale(1.15);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* RESULT */
+
+        .result-card {
+            background: white;
+
+            border: 2px solid #DDE3EA;
+            border-radius: 15px;
+
+            padding: 40px 20px;
+
+            margin-top: 30px;
+
+            min-height: 400px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            animation: cardAppear 0.5s ease;
+        }
+
+        .complete {
+            color: #00A878;
+            font-size: 28px;
+        }
+
+        .game-over {
+            color: #E53935;
+            font-size: 30px;
+        }
+
+        .result-text {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .final-score {
+            color: #7E57C2;
+            font-size: 24px;
+            font-weight: bold;
+
+            margin: 25px 0;
+        }
+
+        .treasure {
+            color: #FF9800;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 400px) {
+
+            .title {
+                font-size: 23px;
+            }
+
+            .stage {
+                font-size: 15px;
+            }
+
+            .card {
+                padding: 20px 15px;
+            }
+
+            .question {
+                font-size: 16px;
+            }
+
+            .info {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<div class="game-container" id="game">
+
+</div>
+
+
+<script>
+
+    /* ================================
+       VARIABLES
+    ================================= */
+
+    let score = 0;
+    let chances = 2;
+
+    let timeLeft = 40;
+
+    let timer = null;
+
+
+    /* ================================
+       SOUND
+    ================================= */
+
+    function correctSound() {
+
+        const audioContext =
+            new (window.AudioContext || window.webkitAudioContext)();
+
+        const oscillator =
+            audioContext.createOscillator();
+
+        const gain =
+            audioContext.createGain();
+
+        oscillator.connect(gain);
+        gain.connect(audioContext.destination);
+
+        oscillator.frequency.value = 1000;
+
+        oscillator.start();
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.0001,
+            audioContext.currentTime + 0.15
+        );
+
+        oscillator.stop(
+            audioContext.currentTime + 0.15
+        );
+    }
+
+
+    function wrongSound() {
+
+        const audioContext =
+            new (window.AudioContext || window.webkitAudioContext)();
+
+        const oscillator =
+            audioContext.createOscillator();
+
+        const gain =
+            audioContext.createGain();
+
+        oscillator.connect(gain);
+        gain.connect(audioContext.destination);
+
+        oscillator.frequency.value = 400;
+
+        oscillator.start();
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.0001,
+            audioContext.currentTime + 0.3
+        );
+
+        oscillator.stop(
+            audioContext.currentTime + 0.3
+        );
+    }
+
+
+    function timeSound() {
+
+        const audioContext =
+            new (window.AudioContext || window.webkitAudioContext)();
+
+        const oscillator =
+            audioContext.createOscillator();
+
+        const gain =
+            audioContext.createGain();
+
+        oscillator.connect(gain);
+        gain.connect(audioContext.destination);
+
+        oscillator.frequency.value = 300;
+
+        oscillator.start();
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.0001,
+            audioContext.currentTime + 0.7
+        );
+
+        oscillator.stop(
+            audioContext.currentTime + 0.7
+        );
+    }
+
+
+    /* ================================
+       STOP TIMER
+    ================================= */
+
+    function stopTimer() {
+
+        if (timer !== null) {
+
+            clearInterval(timer);
+
+            timer = null;
+        }
+    }
+
+
+    /* ================================
+       START TIMER
+    ================================= */
+
+    function startTimer() {
+
+        stopTimer();
+
+        timeLeft = 40;
+
+        updateTimer();
+
+        timer = setInterval(function() {
+
+            timeLeft--;
+
+            updateTimer();
+
+            if (timeLeft <= 0) {
+
+                stopTimer();
+
+                timeSound();
+
+                gameOver("⏰ Time is over!");
+            }
+
+        }, 1000);
+    }
+
+
+    /* ================================
+       UPDATE TIMER
+    ================================= */
+
+    function updateTimer() {
+
+        const timerElement =
+            document.getElementById("timer");
+
+        if (timerElement) {
+
+            timerElement.innerHTML =
+                "⏱ Time: " + timeLeft + "s";
+        }
+    }
+
+
+    /* ================================
+       HEADER
+    ================================= */
+
+    function createHeader(stage) {
+
+        return `
+
+            <div class="title">
+                🏆 TREASURE HUNT
+            </div>
+
+            <div class="stage">
+                SET 5 • ${stage}
+            </div>
+
+            <div class="info">
+
+                <div class="timer" id="timer">
+                    ⏱ Time: 40s
+                </div>
+
+                <div class="chances" id="chances">
+                    ❤️ Chances: ${chances}
+                </div>
+
+                <div class="score" id="score">
+                    ⭐ Score: ${score}
+                </div>
+
+            </div>
+
+        `;
+    }
+
+
+    /* ================================
+       CLUE 5
+    ================================= */
+
+    function clue5() {
+
+        stopTimer();
+
+        chances = 2;
+
+        document.getElementById("game").innerHTML =
+
+            createHeader("CLUE 5") +
+
+            `
+
+            <div class="card">
+
+                <div class="question">
+
+                    🔎 CLUE 5
+
+                    <br><br>
+
+                    I have many steps, but I never walk.
+
+                    <br>
+
+                    Students use me to go up and down.
+
+                </div>
+
+
+                <input
+                    type="text"
+                    id="clueAnswer"
+                    class="answer-box"
+                    placeholder="Enter your answer"
+                >
+
+
+                <button onclick="checkClue5()">
+
+                    🔐 SUBMIT CLUE
+
+                </button>
+
+            </div>
+
+            `;
+
+        startTimer();
+
+        document
+            .getElementById("clueAnswer")
+            .focus();
+    }
+
+
+    /* ================================
+       CHECK CLUE 5
+    ================================= */
+
+    function checkClue5() {
+
+        const answer =
+            document
+            .getElementById("clueAnswer")
+            .value
+            .trim()
+            .toLowerCase();
+
+
+        if (answer === "stairs") {
+
+            stopTimer();
+
+            correctSound();
+
+            score += 10;
+
+            showPointsPopup(
+                10,
+                quiz5
+            );
+
+        }
+
+        else {
+
+            chances--;
+
+            wrongSound();
+
+            updateChances();
+
+
+            if (chances === 1) {
+
+                alert(
+                    "❌ Wrong answer!\n\n" +
+                    "You have 1 chance left."
+                );
+
+                document
+                    .getElementById("clueAnswer")
+                    .value = "";
+
+            }
+
+            else {
+
+                gameOver(
+                    "❌ You used both chances!"
+                );
+            }
+        }
+    }
+
+
+    /* ================================
+       UPDATE CHANCES
+    ================================= */
+
+    function updateChances() {
+
+        const element =
+            document.getElementById("chances");
+
+        if (element) {
+
+            element.innerHTML =
+                "❤️ Chances: " + chances;
+        }
+    }
+
+
+    /* ================================
+       UPDATE SCORE
+    ================================= */
+
+    function updateScore() {
+
+        const element =
+            document.getElementById("score");
+
+        if (element) {
+
+            element.innerHTML =
+                "⭐ Score: " + score;
+        }
+    }
+
+
+    /* ================================
+       QUIZ 5
+    ================================= */
+
+    function quiz5() {
+
+        stopTimer();
+
+        chances = 2;
+
+        document.getElementById("game").innerHTML =
+
+            createHeader("QUIZ 5") +
+
+            `
+
+            <div class="card">
+
+                <div class="question">
+
+                    🧠 QUIZ 5
+
+                    <br><br>
+
+                    What is 25% of 240?
+
+                </div>
+
+
+                <label class="option">
+
+                    <input
+                        type="radio"
+                        name="answer"
+                        value="50"
+                    >
+
+                    50
+
+                </label>
+
+
+                <label class="option">
+
+                    <input
+                        type="radio"
+                        name="answer"
+                        value="55"
+                    >
+
+                    55
+
+                </label>
+
+
+                <label class="option">
+
+                    <input
+                        type="radio"
+                        name="answer"
+                        value="60"
+                    >
+
+                    60
+
+                </label>
+
+
+                <label class="option">
+
+                    <input
+                        type="radio"
+                        name="answer"
+                        value="65"
+                    >
+
+                    65
+
+                </label>
+
+            </div>
+
+
+            <button onclick="checkQuiz5()">
+
+                ✅ SUBMIT ANSWER
+
+            </button>
+
+            `;
+
+        startTimer();
+    }
+
+
+    /* ================================
+       CHECK QUIZ 5
+    ================================= */
+
+    function checkQuiz5() {
+
+        const selected =
+            document.querySelector(
+                'input[name="answer"]:checked'
+            );
+
+
+        if (!selected) {
+
+            alert(
+                "Please select an answer first."
+            );
+
+            return;
+        }
+
+
+        const answer =
+            selected.value;
+
+
+        if (answer === "60") {
+
+            stopTimer();
+
+            correctSound();
+
+            score += 10;
+
+            showPointsPopup(
+                10,
+                set5Complete
+            );
+
+        }
+
+        else {
+
+            chances--;
+
+            wrongSound();
+
+            updateChances();
+
+
+            if (chances === 1) {
+
+                alert(
+                    "❌ Wrong answer!\n\n" +
+                    "You have 1 chance left."
+                );
+
+            }
+
+            else {
+
+                gameOver(
+                    "❌ You used both chances!"
+                );
+            }
+        }
+    }
+
+
+    /* ================================
+       POINTS POPUP
+    ================================= */
+
+    function showPointsPopup(
+        points,
+        callback
+    ) {
+
+        const popup =
+            document.createElement("div");
+
+        popup.className =
+            "popup-background";
+
+
+        popup.innerHTML = `
+
+            <div class="points-popup">
+
+                <h1>
+                    +${points} POINTS!
+                </h1>
+
+            </div>
+
+        `;
+
+
+        document.body.appendChild(popup);
+
+
+        setTimeout(function() {
+
+            popup.remove();
+
+            updateScore();
+
+            callback();
+
+        }, 1000);
+    }
+
+
+    /* ================================
+       SET 5 COMPLETE
+    ================================= */
+
+    function set5Complete() {
+
+        stopTimer();
+
+        document.getElementById("game").innerHTML =
+
+            createHeader("COMPLETED") +
+
+            `
+
+            <div class="result-card">
+
+                <div class="complete">
+
+                    🎉 SET 5 COMPLETE!
+
+                </div>
+
+
+                <p class="result-text">
+
+                    You solved the final clue
+                    <br>
+                    and completed the final quiz!
+
+                </p>
+
+
+                <div class="final-score">
+
+                    🏆 SET 5 SCORE
+
+                    <br><br>
+
+                    ${score} / 20
+
+                </div>
+
+
+                <div class="treasure">
+
+                    ✨ Treasure Hunt Complete! ✨
+
+                </div>
+
+            </div>
+
+            `;
+    }
+
+
+    /* ================================
+       GAME OVER
+    ================================= */
+
+    function gameOver(reason) {
+
+        stopTimer();
+
+        document.getElementById("game").innerHTML =
+
+            createHeader("GAME OVER") +
+
+            `
+
+            <div class="result-card">
+
+                <div class="game-over">
+
+                    💔 GAME OVER
+
+                </div>
+
+
+                <p class="result-text">
+
+                    ${reason}
+
+                </p>
+
+
+                <div class="final-score">
+
+                    Your Score
+
+                    <br><br>
+
+                    ${score} / 20
+
+                </div>
+
+            </div>
+
+            `;
+    }
+
+
+    /* ================================
+       START GAME
+    ================================= */
+
+    clue5();
+
+</script>
+
+</body>
+</html>
