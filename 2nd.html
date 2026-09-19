@@ -1,0 +1,1038 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>⭐ Think and Win - Set 2</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #F4F7FB;
+            color: #263238;
+        }
+
+        .container {
+            width: 500px;
+            max-width: 95%;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        /* TITLE */
+
+        h1 {
+            color: #FF8C00;
+            font-size: 30px;
+            margin: 10px;
+            animation: title 1.5s infinite alternate;
+        }
+
+        @keyframes title {
+
+            from {
+                color: #FF8C00;
+            }
+
+            to {
+                color: #FF6F00;
+            }
+
+        }
+
+        .subtitle {
+            margin: 5px;
+        }
+
+        /* STAGE */
+
+        .stage {
+            display: inline-block;
+            background: #E3F2FD;
+            color: #2196F3;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin: 10px;
+        }
+
+        /* TIMER */
+
+        .timer {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .bar-bg {
+            width: 100%;
+            height: 12px;
+            background: #DDE3EA;
+            border-radius: 20px;
+            margin: 8px 0;
+            overflow: hidden;
+        }
+
+        #bar {
+            height: 100%;
+            width: 100%;
+            background: #00A878;
+            transition: 1s;
+        }
+
+        /* STATUS */
+
+        .status {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 15px;
+            font-weight: bold;
+        }
+
+        #score {
+            color: #FF8C00;
+        }
+
+        /* CARD */
+
+        .card {
+            background: white;
+            min-height: 400px;
+            border-radius: 15px;
+            padding: 30px 20px;
+            margin-top: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .card h2 {
+            color: #FF8C00;
+            font-size: 25px;
+        }
+
+        .question {
+            font-size: 18px;
+            line-height: 1.6;
+            margin: 25px 0;
+        }
+
+        /* TEXT INPUT */
+
+        input[type="text"] {
+            width: 80%;
+            padding: 13px;
+            font-size: 17px;
+            text-align: center;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"]:focus {
+            border-color: #2196F3;
+            outline: none;
+        }
+
+        /* OPTIONS */
+
+        .option {
+            display: block;
+            width: 85%;
+            margin: 8px auto;
+            padding: 12px;
+            text-align: left;
+            background: #F4F7FB;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .option:hover {
+            background: #E3F2FD;
+        }
+
+        .option input {
+            margin-right: 10px;
+        }
+
+        /* BUTTON */
+
+        button {
+            border: none;
+            color: white;
+            padding: 13px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .blue {
+            background: #2196F3;
+        }
+
+        .purple {
+            background: #7E57C2;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background: #00A878;
+        }
+
+        /* POPUP */
+
+        #popup {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .popup-box {
+            background: #00A878;
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            animation: pop 0.5s;
+        }
+
+        @keyframes pop {
+
+            0% {
+                transform: scale(0.3);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+
+        }
+
+        /* COMPLETE */
+
+        .complete {
+            padding-top: 50px;
+        }
+
+        .complete h2 {
+            color: #00A878;
+            font-size: 30px;
+        }
+
+        .final-score {
+            color: #FF8C00;
+            font-size: 28px;
+            font-weight: bold;
+            margin: 25px;
+        }
+
+        /* GAME OVER */
+
+        .gameover h2 {
+            color: #E53935;
+            font-size: 32px;
+        }
+
+        /* MOBILE */
+
+        @media(max-width:600px) {
+
+            .container {
+                margin-top: 10px;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+
+            .card {
+                min-height: 420px;
+            }
+
+            input[type="text"],
+            .option {
+                width: 95%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <h1>
+        🏆 TREASURE HUNT
+    </h1>
+
+
+    <p class="subtitle">
+        Competitive Skills • SET 2
+    </p>
+
+
+    <div class="stage" id="stage">
+        🔎 CLUE 2
+    </div>
+
+
+    <!-- TIMER -->
+
+    <div class="timer" id="timer">
+        ⏱ Time: 40
+    </div>
+
+
+    <div class="bar-bg">
+
+        <div id="bar"></div>
+
+    </div>
+
+
+    <!-- STATUS -->
+
+    <div class="status">
+
+        <div id="chances">
+            ❤️ Chances Left: 2
+        </div>
+
+
+        <div id="score">
+            ⭐ Score: 0
+        </div>
+
+    </div>
+
+
+    <!-- GAME CARD -->
+
+    <div class="card" id="game">
+
+    </div>
+
+
+</div>
+
+
+<!-- POINT POPUP -->
+
+<div id="popup">
+
+    <div class="popup-box">
+
+        🎉
+        <br><br>
+
+        +10 POINTS!
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+// =====================================================
+// VARIABLES
+// =====================================================
+
+let score = 0;
+
+let chances = 2;
+
+let time = 40;
+
+let timer;
+
+
+
+// =====================================================
+// HTML ELEMENTS
+// =====================================================
+
+const game =
+    document.getElementById("game");
+
+const stage =
+    document.getElementById("stage");
+
+const timerText =
+    document.getElementById("timer");
+
+const bar =
+    document.getElementById("bar");
+
+const chancesText =
+    document.getElementById("chances");
+
+const scoreText =
+    document.getElementById("score");
+
+const popup =
+    document.getElementById("popup");
+
+
+
+// =====================================================
+// UPDATE SCORE AND CHANCES
+// =====================================================
+
+function update() {
+
+    chancesText.innerHTML =
+        "❤️ Chances Left: " + chances;
+
+    scoreText.innerHTML =
+        "⭐ Score: " + score;
+
+}
+
+
+
+// =====================================================
+// SOUND
+// =====================================================
+
+function sound(type) {
+
+    try {
+
+        let audio =
+            new AudioContext();
+
+        let oscillator =
+            audio.createOscillator();
+
+
+        oscillator.connect(
+            audio.destination
+        );
+
+
+        if (type === "correct") {
+
+            oscillator.frequency.value =
+                1000;
+
+        }
+
+        else {
+
+            oscillator.frequency.value =
+                400;
+
+        }
+
+
+        oscillator.start();
+
+
+        oscillator.stop(
+            audio.currentTime + 0.2
+        );
+
+    }
+
+    catch(error) {
+
+        console.log("Sound unavailable");
+
+    }
+
+}
+
+
+
+// =====================================================
+// TIMER
+// =====================================================
+
+function startTimer() {
+
+    clearInterval(timer);
+
+    time = 40;
+
+    updateTimer();
+
+
+    timer = setInterval(function() {
+
+        time--;
+
+        updateTimer();
+
+
+        if (time <= 0) {
+
+            clearInterval(timer);
+
+            sound("wrong");
+
+            gameOver(
+                "⏰ Time's Up!"
+            );
+
+        }
+
+    }, 1000);
+
+}
+
+
+
+// =====================================================
+// UPDATE TIMER
+// =====================================================
+
+function updateTimer() {
+
+    timerText.innerHTML =
+        "⏱ Time: " + time;
+
+
+    let percentage =
+        (time / 40) * 100;
+
+
+    bar.style.width =
+        percentage + "%";
+
+
+    if (time > 20) {
+
+        bar.style.background =
+            "#00A878";
+
+        timerText.style.color =
+            "#00A878";
+
+    }
+
+
+    else if (time > 10) {
+
+        bar.style.background =
+            "#FF9800";
+
+        timerText.style.color =
+            "#FF9800";
+
+    }
+
+
+    else {
+
+        bar.style.background =
+            "#E53935";
+
+        timerText.style.color =
+            "#E53935";
+
+    }
+
+}
+
+
+
+// =====================================================
+// POINTS POPUP
+// =====================================================
+
+function points(callback) {
+
+    clearInterval(timer);
+
+    popup.style.display =
+        "flex";
+
+
+    setTimeout(function() {
+
+        popup.style.display =
+            "none";
+
+        callback();
+
+    }, 1200);
+
+}
+
+
+
+// =====================================================
+// CLUE 2
+// =====================================================
+
+function clue2() {
+
+    chances = 2;
+
+    stage.innerHTML =
+        "🔎 CLUE 2";
+
+    update();
+
+
+    game.innerHTML = `
+
+        <h2>
+            🗝️ TREASURE CLUE
+        </h2>
+
+
+        <div class="question">
+
+            I am the place where students<br>
+
+            attend lectures and classes.
+
+            <br><br>
+
+            <b>What am I?</b>
+
+        </div>
+
+
+        <input
+            type="text"
+            id="answer"
+            placeholder="Enter your answer"
+        >
+
+
+        <br>
+
+
+        <button
+            class="blue"
+            onclick="checkClue()">
+
+            🔓 SUBMIT ANSWER
+
+        </button>
+
+    `;
+
+
+    startTimer();
+
+}
+
+
+
+// =====================================================
+// CHECK CLUE 2
+// =====================================================
+
+function checkClue() {
+
+    let answer =
+        document
+        .getElementById("answer")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    if (answer === "classroom") {
+
+        score += 10;
+
+        update();
+
+        sound("correct");
+
+        points(quiz2);
+
+    }
+
+
+    else {
+
+        chances--;
+
+        update();
+
+        sound("wrong");
+
+
+        if (chances === 1) {
+
+            alert(
+                "❌ Wrong Answer!\n\n" +
+                "You have 1 chance left."
+            );
+
+
+            document
+            .getElementById("answer")
+            .value = "";
+
+        }
+
+
+        else {
+
+            gameOver(
+                "❌ You used both chances!"
+            );
+
+        }
+
+    }
+
+}
+
+
+
+// =====================================================
+// QUIZ 2
+// =====================================================
+
+function quiz2() {
+
+    chances = 2;
+
+    stage.innerHTML =
+        "🧠 QUIZ 2";
+
+    update();
+
+
+    game.innerHTML = `
+
+        <h2>
+            🧠 TIME MANAGEMENT
+        </h2>
+
+
+        <div class="question">
+
+            Which is a good example of<br>
+
+            time management?
+
+        </div>
+
+
+        <label class="option">
+
+            <input
+                type="radio"
+                name="quiz"
+                value="schedule">
+
+            Making a schedule
+
+        </label>
+
+
+        <label class="option">
+
+            <input
+                type="radio"
+                name="quiz"
+                value="ignore">
+
+            Ignoring deadlines
+
+        </label>
+
+
+        <label class="option">
+
+            <input
+                type="radio"
+                name="quiz"
+                value="last">
+
+            Doing everything at the last minute
+
+        </label>
+
+
+        <label class="option">
+
+            <input
+                type="radio"
+                name="quiz"
+                value="delay">
+
+            Delaying important work
+
+        </label>
+
+
+        <button
+            class="purple"
+            onclick="checkQuiz()">
+
+            🚀 SUBMIT ANSWER
+
+        </button>
+
+    `;
+
+
+    startTimer();
+
+}
+
+
+
+// =====================================================
+// CHECK QUIZ 2
+// =====================================================
+
+function checkQuiz() {
+
+    let selected =
+        document.querySelector(
+            'input[name="quiz"]:checked'
+        );
+
+
+    if (!selected) {
+
+        alert(
+            "⚠️ Please select an answer."
+        );
+
+        return;
+
+    }
+
+
+    if (selected.value === "schedule") {
+
+        score += 10;
+
+        update();
+
+        sound("correct");
+
+        points(setComplete);
+
+    }
+
+
+    else {
+
+        chances--;
+
+        update();
+
+        sound("wrong");
+
+
+        if (chances === 1) {
+
+            alert(
+                "❌ Wrong Answer!\n\n" +
+                "You have 1 chance left."
+            );
+
+        }
+
+
+        else {
+
+            gameOver(
+                "❌ You used both chances!"
+            );
+
+        }
+
+    }
+
+}
+
+
+
+// =====================================================
+// SET 2 COMPLETE
+// =====================================================
+
+function setComplete() {
+
+    clearInterval(timer);
+
+
+    stage.innerHTML =
+        "🏆 SET 2 COMPLETE";
+
+
+    game.innerHTML = `
+
+        <div class="complete">
+
+
+            <h2>
+                🎉 SET 2 COMPLETE!
+            </h2>
+
+
+            <p class="question">
+
+                You completed both<br>
+
+                Clue 2 and Quiz 2!
+
+            </p>
+
+
+            <div class="final-score">
+
+                ⭐ SET 2 SCORE
+
+                <br><br>
+
+                ${score} / 20
+
+            </div>
+
+
+            <p>
+
+                Clue 2 → +10 points
+
+                <br>
+
+                Quiz 2 → +10 points
+
+            </p>
+
+
+            <br>
+
+
+            <div class="stage">
+
+                SET 2 FINISHED
+
+            </div>
+
+
+        </div>
+
+    `;
+
+
+    timerText.innerHTML =
+        "🎉 Completed!";
+
+
+    bar.style.width =
+        "100%";
+
+}
+
+
+
+// =====================================================
+// GAME OVER
+// =====================================================
+
+function gameOver(reason) {
+
+    clearInterval(timer);
+
+
+    stage.innerHTML =
+        "💀 GAME OVER";
+
+
+    game.innerHTML = `
+
+        <div class="complete gameover">
+
+
+            <h2>
+                💀 GAME OVER
+            </h2>
+
+
+            <p class="question">
+
+                ${reason}
+
+            </p>
+
+
+            <div class="final-score">
+
+                ⭐ SCORE
+
+                <br><br>
+
+                ${score} / 20
+
+            </div>
+
+
+            <p>
+
+                The game has ended.
+
+                <br><br>
+
+                Refresh the page to
+                play again.
+
+            </p>
+
+
+        </div>
+
+    `;
+
+
+    timerText.innerHTML =
+        "⏱ Game Over";
+
+
+    bar.style.width =
+        "0%";
+
+}
+
+
+
+// =====================================================
+// START SET 2
+// =====================================================
+
+clue2();
+
+
+</script>
+
+
+</body>
+</html>
+```
