@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>⭐ Think and Win 💖 - Set 3</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#F4F7FB;
+    color:#263238;
+}
+
+.container{
+    width:100%;
+    max-width:500px;
+    min-height:100vh;
+    margin:auto;
+    padding:12px 20px 25px;
+}
+
+.header{
+    text-align:center;
+}
+
+.title{
+    color:#FF8C00;
+    font-size:28px;
+    font-weight:bold;
+    margin:8px 0;
+}
+
+.stage{
+    color:#7E57C2;
+    font-size:16px;
+    font-weight:bold;
+    margin:5px 0 12px;
+}
+
+.timer-box{
+    background:#E3F2FD;
+    color:#2196F3;
+    font-size:17px;
+    font-weight:bold;
+    text-align:center;
+    padding:9px;
+    border-radius:10px;
+    margin-bottom:8px;
+}
+
+.progress-container{
+    width:100%;
+    height:9px;
+    background:#DDE3EA;
+    border-radius:10px;
+    overflow:hidden;
+    margin-bottom:10px;
+}
+
+.progress{
+    height:100%;
+    width:100%;
+    background:#00A878;
+    transition:width 1s linear, background 0.3s;
+}
+
+.info{
+    display:flex;
+    justify-content:space-between;
+    font-size:15px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+.chances{
+    color:#E53935;
+}
+
+.score{
+    color:#00A878;
+}
+
+.card{
+    background:#FFFFFF;
+    border:2px solid #DDE3EA;
+    border-radius:15px;
+    padding:25px 20px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,0.06);
+}
+
+.question{
+    font-size:18px;
+    font-weight:bold;
+    line-height:1.5;
+    margin-bottom:20px;
+}
+
+.answer{
+    width:100%;
+    padding:13px;
+    border:2px solid #DDE3EA;
+    border-radius:8px;
+    font-size:16px;
+    text-align:center;
+    outline:none;
+}
+
+.answer:focus{
+    border-color:#2196F3;
+}
+
+button{
+    width:100%;
+    border:none;
+    border-radius:9px;
+    padding:14px;
+    margin-top:15px;
+    background:#2196F3;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+button:hover{
+    background:#1976D2;
+    transform:scale(1.02);
+}
+
+.option{
+    display:block;
+    background:#FFFFFF;
+    border:1px solid #DDE3EA;
+    border-radius:8px;
+    padding:11px;
+    margin:8px 0;
+    text-align:left;
+    cursor:pointer;
+}
+
+.option:hover{
+    background:#E3F2FD;
+}
+
+.option input{
+    margin-right:8px;
+}
+
+.popup{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.45);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:10;
+}
+
+.popup-box{
+    width:280px;
+    background:#E3F2FD;
+    border-radius:15px;
+    padding:35px 20px;
+    text-align:center;
+    color:#00A878;
+    font-size:27px;
+    font-weight:bold;
+}
+
+.result{
+    min-height:400px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.result h1{
+    color:#00A878;
+    font-size:27px;
+}
+
+.result p{
+    font-size:16px;
+    text-align:center;
+    line-height:1.5;
+}
+
+.final-score{
+    color:#7E57C2;
+    font-size:23px;
+    font-weight:bold;
+    margin:20px;
+}
+
+.complete{
+    color:#FF9800;
+    font-size:17px;
+    font-weight:bold;
+}
+
+.gameover h1{
+    color:#E53935;
+}
+
+.hidden{
+    display:none;
+}
+
+@media(max-width:400px){
+
+    .container{
+        padding:10px 14px;
+    }
+
+    .title{
+        font-size:24px;
+    }
+
+    .question{
+        font-size:16px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container" id="game">
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="title">🏆 TREASURE HUNT</div>
+        <div class="stage" id="stage">SET 3 • CLUE 3</div>
+    </div>
+
+    <!-- TIMER -->
+    <div class="timer-box" id="timer">
+        ⏱ Time: 40s
+    </div>
+
+    <div class="progress-container">
+        <div class="progress" id="progress"></div>
+    </div>
+
+    <!-- INFO -->
+    <div class="info">
+        <div class="chances" id="chances">
+            ❤️ Chances: 2
+        </div>
+
+        <div class="score" id="score">
+            ⭐ Score: 0
+        </div>
+    </div>
+
+
+    <!-- ================= CLUE 3 ================= -->
+
+    <div id="clueScreen">
+
+        <div class="card">
+
+            <div class="question">
+                🔎 CLUE 3
+                <br><br>
+
+                I have keys but I can not open locks
+
+                <br><br>
+
+                What am I?
+            </div>
+
+            <input
+                type="text"
+                id="clueAnswer"
+                class="answer"
+                placeholder="Enter your answer"
+            >
+
+            <button onclick="checkClue()">
+                🔐 SUBMIT CLUE
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= QUIZ 3 ================= -->
+
+    <div id="quizScreen" class="hidden">
+
+        <div class="card">
+
+            <div class="question">
+                🧠 QUIZ 3
+                <br><br>
+
+                A clock shows 3:00. What is the angle between the hands?
+            </div>
+
+            <label class="option">
+                <input type="radio" name="quiz" value="30 degree">
+                30 degree
+            </label>
+
+            <label class="option">
+                <input type="radio" name="quiz" value="60 degree">
+                60 degree
+            </label>
+
+            <label class="option">
+                <input type="radio" name="quiz" value="90 degree">
+                90 degree
+            </label>
+
+            <label class="option">
+                <input type="radio" name="quiz" value="0">
+                0
+            </label>
+
+            <button onclick="checkQuiz()">
+                ✅ SUBMIT ANSWER
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= RESULT ================= -->
+
+    <div id="resultScreen" class="hidden">
+
+        <div class="card result">
+
+            <h1>🎉 SET 3 COMPLETE!</h1>
+
+            <p>
+                You solved the final clue
+                <br>
+                and completed the final quiz!
+            </p>
+
+            <div class="final-score">
+                🏆 SET 3 SCORE
+                <br><br>
+                <span id="finalScore">0</span> / 20
+            </div>
+
+            <div class="complete">
+                ✨ Treasure Hunt Complete! ✨
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= GAME OVER ================= -->
+
+    <div id="gameOverScreen" class="hidden">
+
+        <div class="card result gameover">
+
+            <h1>💔 GAME OVER</h1>
+
+            <p id="gameOverReason"></p>
+
+            <div class="final-score">
+                Your Score
+                <br><br>
+                <span id="gameOverScore">0</span> / 20
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= POINTS POPUP ================= -->
+
+<div class="popup" id="pointsPopup">
+
+    <div class="popup-box">
+        +10 POINTS! 🎉
+    </div>
+
+</div>
+
+
+<script>
+
+// ================= VARIABLES =================
+
+let score = 0;
+let chances = 2;
+let timeLeft = 40;
+let timer;
+
+
+// ================= UPDATE SCREEN =================
+
+function updateInfo(){
+
+    document.getElementById("score").innerHTML =
+        "⭐ Score: " + score;
+
+    document.getElementById("chances").innerHTML =
+        "❤️ Chances: " + chances;
+
+}
+
+
+// ================= SOUND =================
+
+function correctSound(){
+
+    try{
+
+        const audio = new AudioContext();
+
+        let oscillator = audio.createOscillator();
+        let gain = audio.createGain();
+
+        oscillator.frequency.value = 1000;
+        oscillator.connect(gain);
+        gain.connect(audio.destination);
+
+        oscillator.start();
+
+        setTimeout(function(){
+
+            oscillator.frequency.value = 1300;
+
+        },150);
+
+        setTimeout(function(){
+
+            oscillator.stop();
+            audio.close();
+
+        },300);
+
+    }catch(e){}
+
+}
+
+
+function wrongSound(){
+
+    try{
+
+        const audio = new AudioContext();
+
+        let oscillator = audio.createOscillator();
+        let gain = audio.createGain();
+
+        oscillator.frequency.value = 400;
+
+        oscillator.connect(gain);
+        gain.connect(audio.destination);
+
+        oscillator.start();
+
+        setTimeout(function(){
+
+            oscillator.stop();
+            audio.close();
+
+        },300);
+
+    }catch(e){}
+
+}
+
+
+function timeSound(){
+
+    try{
+
+        const audio = new AudioContext();
+
+        let oscillator = audio.createOscillator();
+        let gain = audio.createGain();
+
+        oscillator.frequency.value = 300;
+
+        oscillator.connect(gain);
+        gain.connect(audio.destination);
+
+        oscillator.start();
+
+        setTimeout(function(){
+
+            oscillator.stop();
+            audio.close();
+
+        },700);
+
+    }catch(e){}
+
+}
+
+
+// ================= TIMER =================
+
+function startTimer(){
+
+    clearInterval(timer);
+
+    timeLeft = 40;
+
+    updateTimer();
+
+    timer = setInterval(function(){
+
+        timeLeft--;
+
+        updateTimer();
+
+        if(timeLeft <= 0){
+
+            clearInterval(timer);
+
+            timeSound();
+
+            gameOver("⏰ Time is over!");
+
+        }
+
+    },1000);
+
+}
+
+
+function updateTimer(){
+
+    document.getElementById("timer").innerHTML =
+        "⏱ Time: " + timeLeft + "s";
+
+    let percentage = (timeLeft / 40) * 100;
+
+    document.getElementById("progress").style.width =
+        percentage + "%";
+
+
+    if(timeLeft > 20){
+
+        document.getElementById("progress").style.background =
+            "#00A878";
+
+    }
+    else if(timeLeft > 10){
+
+        document.getElementById("progress").style.background =
+            "#FF9800";
+
+    }
+    else{
+
+        document.getElementById("progress").style.background =
+            "#E53935";
+
+    }
+
+}
+
+
+// ================= POPUP =================
+
+function showPointsPopup(callback){
+
+    const popup =
+        document.getElementById("pointsPopup");
+
+    popup.style.display = "flex";
+
+    setTimeout(function(){
+
+        popup.style.display = "none";
+
+        callback();
+
+    },1000);
+
+}
+
+
+// ================= CHECK CLUE =================
+
+function checkClue(){
+
+    let answer =
+        document.getElementById("clueAnswer").value
+        .toLowerCase()
+        .trim();
+
+
+    let correctAnswers = [
+        "Keyboard",
+        "keyboard",
+        "key board"
+    ];
+
+
+    if(correctAnswers.includes(answer)){
+
+        clearInterval(timer);
+
+        correctSound();
+
+        score += 10;
+
+        updateInfo();
+
+        showPointsPopup(function(){
+
+            showQuiz();
+
+        });
+
+    }
+
+    else{
+
+        chances--;
+
+        wrongSound();
+
+        updateInfo();
+
+        document.getElementById("clueAnswer").value = "";
+
+
+        if(chances === 1){
+
+            alert(
+                "❌ Wrong answer!\n\n" +
+                "You have 1 chance left."
+            );
+
+        }
+        else{
+
+            gameOver(
+                "❌ You used both chances!"
+            );
+
+        }
+
+    }
+
+}
+
+
+// ================= SHOW QUIZ =================
+
+function showQuiz(){
+
+    chances = 2;
+
+    updateInfo();
+
+    document.getElementById("stage").innerHTML =
+        "SET 3 • QUIZ 3";
+
+    document.getElementById("clueScreen")
+        .classList.add("hidden");
+
+    document.getElementById("quizScreen")
+        .classList.remove("hidden");
+
+    startTimer();
+
+}
+
+
+// ================= CHECK QUIZ =================
+
+function checkQuiz(){
+
+    let selected =
+        document.querySelector(
+            'input[name="quiz"]:checked'
+        );
+
+
+    if(!selected){
+
+        alert(
+            "Please select an answer first."
+        );
+
+        return;
+
+    }
+
+
+    let answer = selected.value;
+
+
+    if(answer === "90 degree"){
+
+        clearInterval(timer);
+
+        correctSound();
+
+        score += 10;
+
+        updateInfo();
+
+        showPointsPopup(function(){
+
+            setComplete();
+
+        });
+
+    }
+
+    else{
+
+        chances--;
+
+        wrongSound();
+
+        updateInfo();
+
+
+        if(chances === 1){
+
+            alert(
+                "❌ Wrong answer!\n\n" +
+                "You have 1 chance left."
+            );
+
+        }
+        else{
+
+            gameOver(
+                "❌ You used both chances!"
+            );
+
+        }
+
+    }
+
+}
+
+
+// ================= SET COMPLETE =================
+
+function setComplete(){
+
+    clearInterval(timer);
+
+    document.getElementById("stage").innerHTML =
+        "SET 3 • COMPLETED";
+
+    document.getElementById("clueScreen")
+        .classList.add("hidden");
+
+    document.getElementById("quizScreen")
+        .classList.add("hidden");
+
+    document.getElementById("resultScreen")
+        .classList.remove("hidden");
+
+    document.getElementById("finalScore")
+        .innerHTML = score;
+
+}
+
+
+// ================= GAME OVER =================
+
+function gameOver(reason){
+
+    clearInterval(timer);
+
+    document.getElementById("clueScreen")
+        .classList.add("hidden");
+
+    document.getElementById("quizScreen")
+        .classList.add("hidden");
+
+    document.getElementById("resultScreen")
+        .classList.add("hidden");
+
+    document.getElementById("gameOverScreen")
+        .classList.remove("hidden");
+
+    document.getElementById("stage").innerHTML =
+        "SET 3 • GAME OVER";
+
+    document.getElementById("gameOverReason")
+        .innerHTML = reason;
+
+    document.getElementById("gameOverScore")
+        .innerHTML = score;
+
+}
+
+
+// ================= START GAME =================
+
+updateInfo();
+
+startTimer();
+
+document.getElementById("clueAnswer")
+    .addEventListener("keypress", function(event){
+
+        if(event.key === "Enter"){
+
+            checkClue();
+
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
